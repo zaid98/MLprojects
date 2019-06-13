@@ -1,0 +1,259 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  2 23:23:15 2019
+
+@author: zaid
+"""
+
+import pandas as pd
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+import matplotlib.gridspec as gridspec
+
+
+
+df = pd.read_csv("dataset5.csv")
+
+X = df.iloc[:,[1,2]].values
+
+y = df.iloc[:,[0]].values
+
+
+
+df1 = pd.read_csv("dataset4.csv")
+
+final = df1[(df1.Crop == "Rice") | (df1.Crop == "SugarCane") | (df1.Crop == "Cotton") | (df1.Crop == "Millet") | (df1.Crop == "Wheat") | (df1.Crop == "Barley")].copy()
+
+final1 = df[(df.Crop == "Rice") | (df.Crop == "SugarCane") | (df.Crop == "Cotton") | (df.Crop == "Millet") | (df.Crop == "Wheat") | (df.Crop == "Barley")].copy()
+
+final2 = pd.concat([final,final1])
+
+final2.to_csv("final_dataset.csv", sep='\t', index = False)
+
+
+
+clean1 = final2[final2.Crop == "Rice"]
+
+Q1 = clean1['Rainfall'].quantile(0.25)
+
+Q3 = clean1['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean1 = clean1[~((clean1['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean1['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+clean2 = final2[final2.Crop == "SugarCane"]
+
+Q1 = clean2['Rainfall'].quantile(0.25)
+
+Q3 = clean2['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean2 = clean2[~((clean2['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean2['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+clean3 = final2[final2.Crop == "Cotton"]
+
+Q1 = clean3['Rainfall'].quantile(0.25)
+
+Q3 = clean3['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean3 = clean3[~((clean3['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean3['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+clean4 = final2[final2.Crop == "Millet"]
+
+Q1 = clean4['Rainfall'].quantile(0.25)
+
+Q3 = clean4['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean4 = clean4[~((clean4['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean4['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+clean5 = final2[final2.Crop == "Wheat"]
+
+Q1 = clean5['Rainfall'].quantile(0.25)
+
+Q3 = clean5['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean5 = clean5[~((clean5['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean5['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+clean6 = final2[final2.Crop == "Barley"]
+
+Q1 = clean6['Rainfall'].quantile(0.25)
+
+Q3 = clean6['Rainfall'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean6 = clean6[~((clean6['Rainfall'] < (Q1 - 1.5 * IQR)) | (clean6['Rainfall'] > (Q3 + 1.5 * IQR)))]
+
+
+
+
+
+Q1 = clean1['Temperature'].quantile(0.25)
+
+Q3 = clean1['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean1 = clean1[~((clean1['Temperature'] < (Q1 - 1.5 * IQR)) | (clean1['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean2['Temperature'].quantile(0.25)
+
+Q3 = clean2['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean2 = clean2[~((clean2['Temperature'] < (Q1 - 1.5 * IQR)) | (clean2['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean3['Temperature'].quantile(0.25)
+
+Q3 = clean3['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean3 = clean3[~((clean3['Temperature'] < (Q1 - 1.5 * IQR)) | (clean3['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean4['Temperature'].quantile(0.25)
+
+Q3 = clean4['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean4 = clean4[~((clean4['Temperature'] < (Q1 - 1.5 * IQR)) | (clean4['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean5['Temperature'].quantile(0.25)
+
+Q3 = clean5['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean5 = clean5[~((clean5['Temperature'] < (Q1 - 1.5 * IQR)) | (clean5['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean6['Temperature'].quantile(0.25)
+
+Q3 = clean6['Temperature'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean6 = clean6[~((clean6['Temperature'] < (Q1 - 1.5 * IQR)) | (clean6['Temperature'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean1['Humidity'].quantile(0.25)
+
+Q3 = clean1['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean1 = clean1[~((clean1['Humidity'] < (Q1 - 1.5 * IQR)) | (clean1['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean2['Humidity'].quantile(0.25)
+
+Q3 = clean2['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean2 = clean2[~((clean2['Humidity'] < (Q1 - 1.5 * IQR)) | (clean2['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean3['Humidity'].quantile(0.25)
+
+Q3 = clean3['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean3 = clean3[~((clean3['Humidity'] < (Q1 - 1.5 * IQR)) | (clean3['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean4['Humidity'].quantile(0.25)
+
+Q3 = clean4['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean4 = clean4[~((clean4['Humidity'] < (Q1 - 1.5 * IQR)) | (clean4['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean5['Humidity'].quantile(0.25)
+
+Q3 = clean5['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean5 = clean5[~((clean5['Humidity'] < (Q1 - 1.5 * IQR)) | (clean5['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+Q1 = clean6['Humidity'].quantile(0.25)
+
+Q3 = clean6['Humidity'].quantile(0.75)
+
+IQR = Q3-Q1
+
+clean6 = clean6[~((clean6['Humidity'] < (Q1 - 1.5 * IQR)) | (clean6['Humidity'] > (Q3 + 1.5 * IQR)))]
+
+
+
+finaldf = pd.concat([clean1,clean2,clean3,clean4,clean5,clean6])
+sns.lineplot(x="Crop",y="Rainfall",data=finaldf)
+plt.figure()
+sns.pointplot(x="Crop",y="Temperature",data=finaldf,join=False)
+plt.figure()
+sns.pointplot(x="Crop",y="Humidity",data=finaldf,join=False)
+plt.figure()
+sns.barplot(x="Crop",y="Rainfall",data=finaldf)
+plt.figure()
+sns.set(style="whitegrid",rc={'figure.figsize':(10,8)})
+ax1 = sns.boxplot(x="Rainfall", y="Crop", data=finaldf)
+plt.figure()
+sns.set(style="whitegrid",rc={'figure.figsize':(10,8)})
+ax2 = sns.lineplot(x="Rainfall", y="Humidity",data=clean1)
+plt.figure()
+ax3 = sns.lineplot(x="Rainfall", y="Humidity",data=clean2)
+plt.figure()
+ax3 = sns.lineplot(x="Rainfall", y="Humidity",data=clean3)
+plt.figure()
+ax3 = sns.lineplot(x="Rainfall", y="Humidity",data=clean4)
+plt.figure()
+ax3 = sns.lineplot(x="Rainfall", y="Humidity",data=clean5)
+plt.figure()
+ax3 = sns.lineplot(x="Rainfall", y="Humidity",data=clean6)
+plt.figure()
+
